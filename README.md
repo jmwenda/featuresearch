@@ -37,10 +37,9 @@ Due to space constrainsts, the indexed is false on this and so is storage on thi
 
 Test client
 ================================
-For the test client, I have been using the cga-worldmap ogpsearch client. The client could be reduced to a lightweight client to test with, with this
-branch it is easy to get up and running
-    https://github.com/cga-harvard/cga-worldmap/tree/ogpsearch2
-To view data that has been indexed to the core some changed were made to the client inorder to be displayed. A branch with all these changes is here
+For the test client, I have been using the cga-worldmap ogpsearch client. The client could be reduced to a lightweight client to test with(i.e something purely javascript i.e with nodejs), for purposes of the test I used the ogpsearch django app. With this
+branch it is easy to get up and running(https://github.com/cga-harvard/cga-worldmap/tree/ogpsearch2). Slight modifications were made to this branch in order to render
+the heatmap. The branch with all these changes is here
 
     https://github.com/jmwenda/geonode/tree/featuresearch
 
@@ -58,6 +57,7 @@ Need to change the table querying fields
     https://github.com/cga-harvard/cga-worldmap/blob/ogpsearch2/geonode/static/ogpsearch/resources/javascript/lib/solr.js#L220-L223
 
 Approaches which may need more investigation
+
 As mentioned earlier, there are layers in the API that do not have any corresponsing tables in the database: the list of layers is depicted here
     https://gist.github.com/jmwenda/49d0df13e8452d11383227e7ea4f9579#file-gistfile1-txt
 Upon investigation, it is not clear if they private or just do not exist.
