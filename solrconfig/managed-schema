@@ -32,9 +32,9 @@
   <fieldType name="int" class="solr.TrieIntField" positionIncrementGap="0" precisionStep="0"/>
   <fieldType name="ints" class="solr.TrieIntField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
   <fieldType name="location" class="solr.LatLonType" subFieldSuffix="_coordinate"/>
-  <!--<fieldType name="location_rpt" class="solr.SpatialRecursivePrefixTreeFieldType" geo="true" maxDistErr="1" distErrPct="0.5" distanceUnits="kilometers"/> -->
-  <fieldType name="location_rpt" class="solr.RptWithGeometrySpatialField" spatialContextFactory="com.spatial4j.core.context.jts.JtsSpatialContextFactory" geo="true" maxDistErr="1" distErrPct="0.5" distanceUnits="kilometers"/>
-  <fieldType name="_bbox_coord" class="solr.TrieDoubleField" precisionStep="8" docValues="true" stored="false"/> 
+  <fieldType name="location_rpt" class="solr.SpatialRecursivePrefixTreeFieldType" spatialContextFactory="com.spatial4j.core.context.jts.JtsSpatialContextFactory" geo="true" maxDistErr="1" distErrPct="0.5" distanceUnits="kilometers"/>
+  <!--<fieldType name="location_rpt" class="solr.RptWithGeometrySpatialField" spatialContextFactory="com.spatial4j.core.context.jts.JtsSpatialContextFactory" geo="true" maxDistErr="1" distErrPct="0.5" distanceUnits="kilometers"/>-->
+ <fieldType name="_bbox_coord" class="solr.TrieDoubleField" precisionStep="8" docValues="true" stored="false"/> 
   <fieldType name="bbox" class="solr.BBoxField" geo="true" distanceUnits="kilometers" numberType="_bbox_coord" storeSubFields="false"/>
   <fieldType name="long" class="solr.TrieLongField" positionIncrementGap="0" precisionStep="0"/>
   <fieldType name="longs" class="solr.TrieLongField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
@@ -417,6 +417,7 @@
   <field name="_text_" type="text_general" multiValued="true" indexed="true" stored="false"/>
   <field name="_version_" type="long" indexed="true" stored="true"/>
   <field name="the_geom" type="location_rpt" stored="false"/> 
+  <field name="bbox" type="bbox" stored="true"/>
   <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
   <field name="owner" type="strings"/>
   <dynamicField name="*_txt_en_split_tight" type="text_en_splitting_tight" indexed="true" stored="true"/>

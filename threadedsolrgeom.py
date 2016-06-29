@@ -18,17 +18,23 @@ def push_to_solr(solr_json,layername):
 
 def build_json_docs(rows,layerid,layerdate,layername,owner):
     columns_number = len(rows[0])
-    text_columns_number = columns_number - 2
+    text_columns_number = columns_number - 3
     layer_documents = []
     for row in rows:
         text = ''
         for i in range(1, text_columns_number):
             if row[i] is not None:
                 text += row[i] + ' '
-        area = row[columns_number-1]
+        extent = row[columns_number-1]
+        box =  extent[extent.find("(")+1:extent.find(")")]
+        min_max_list = [x.strip() for x in box.split(',')]
+        minvalues = [x.strip() for x in min_max_list[0].split(' ')]
+        maxvalues = [x.strip() for x in min_max_list[1].split(' ')]
+        envelope = "ENVELOPE(%s, %s, %s, %s)" % (minvalues[0], maxvalues[0], maxvalues[1], minvalues[1])
+        area = row[columns_number-2]
         #we round the area
         area = round(area + 0.005, 2)
-        geometry = row[columns_number-2]
+        geometry = row[columns_number-3]
         solr_record = {
                        "LayerId": layerid,
                        "FeatureId": row[0],
@@ -38,6 +44,7 @@ def build_json_docs(rows,layerid,layerdate,layername,owner):
                        "FeatureDate": "",
                        "the_geom": geometry,
                        "FeatureText": text,
+                       "bbox": envelope,
                        "owner": owner
                     }
         layer_documents.append(solr_record)
@@ -73,10 +80,10 @@ def build_query(srids,query_columns,table_name,featureid):
         srid = srids[0][0]
         the_geom = srids[0][1]        
         # This is for one projection space but not in default 4326
-        geom_area = 'ST_AsText(ST_Transform(%s,4326)) AS geom, ST_Area(ST_AsText(ST_Transform(%s, 4326))) As area' % (the_geom,the_geom)
+        geom_area = 'ST_AsText(ST_Transform(%s,4326)) AS geom, ST_Area(ST_AsText(ST_Transform(%s, 4326))) As area, box2d(ST_Transform(ST_SetSRID(%s,%s),4326)) as extent' % (the_geom,the_geom,the_geom,srid)
         query = 'SELECT %s %s FROM "%s" GROUP BY %s' %(query_columns, geom_area, table_name, featureid)
         if (srid == 4326) or (srid == 0) or (srid == 42101):
-            query = 'SELECT %s ST_AsText(%s) AS geom, ST_Area(ST_AsText(%s)) As area FROM "%s" GROUP BY %s' %(query_columns, the_geom, the_geom,table_name, featureid)
+            query = 'SELECT %s ST_AsText(%s) AS geom, ST_Area(ST_AsText(%s)) As area, box2d(ST_SetSRID(%s,%s)) as extent FROM "%s" GROUP BY %s' %(query_columns, the_geom, the_geom,the_geom, srid, table_name, featureid)
     print query
     return query
 
