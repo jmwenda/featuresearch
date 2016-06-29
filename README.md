@@ -35,6 +35,14 @@ Due to space constrainsts, the indexed is false on this and so is storage on thi
     FeatureText: This is a concatenation of all strings that are character varying
     owner : This is the owner of the layer
 
+There are two configurations to get good resolution when indexing geometry fields.
+
+https://cwiki.apache.org/confluence/display/solr/Spatial+Search
+
+rptWithGeometrySpatialField just stores the original geometry in Lucene DocValues, which it uses to achieve accurate search. his field type is configured just like RPT except that the default distErrPct is 0.15. Unfortunately this takes up alot of space.
+
+To achieve or use up less space with the solr.SpatialRecursivePrefixTreeFieldType on could set the stored parameter to false and the index parameter to false. Additionally one could also increase the resolution by altering the parameters maxDistErr="1" distErrPct="0.5" . 
+
 Test client
 ================================
 For the test client, I have been using the cga-worldmap ogpsearch client. The client could be reduced to a lightweight client to test with(i.e something purely javascript i.e with nodejs), for purposes of the test I used the ogpsearch django app. With this
