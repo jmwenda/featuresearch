@@ -1,0 +1,98 @@
+@CHARSET "UTF-8";
+
+
+#logoGraphic {
+		background: url("../media/World-Map-w-Harvard-SMALL.png") no-repeat;
+		height: 40px;
+		width: 200px;
+		padding: 2px;
+}
+
+#logo > div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#logo > div.logoText {
+	margin-left: -9px;
+	display: none;
+}
+/*
+#footerLogos .institutionLogo {
+	background: url("../media/ogp-institutions.png") no-repeat scroll -9px
+		-59px transparent;
+	height: 30px;
+	width: 66px;
+}
+*/
+
+
+#ogpMapButtons {
+	display: none;
+}
+
+.olControlPanel.olControlNoSelect {
+        display: none;
+}
+
+#geosearchDiv {
+	display: none;
+}
+
+#top_menu {
+	display: none;
+}
+
+[aria-controls="cartTab"] {
+	display: none;
+}
+
+.olControlModPanZoomBar {
+  margin-left: 475px;
+}
+
+
+/*#moreSearchOptions {
+	display: none;
+}*/
+.searchBox{
+	height:40px;
+}
+#searchCol3 .searchRow2{
+	display: none !important;
+}
+#searchCol3 .searchRow1{
+	display: none !important;
+}
+#searchCol1 .searchRow3{
+	display: none !important;
+}
+#searchCol1 .searchRow2{
+	display: none !important;
+}
+#searchCol1 .searchRow1{
+	display: none !important;
+}
+#searchCol2 .searchRow3{
+	display: none !important;
+}
+#searchCol2 .searchRow4{
+	display: none !important;
+	margin-bottom: 10px;
+}
+
+
+
+#mapClearButton {
+	display: none;
+}
+.esriIcon {
+    background: transparent url("../media/esri.png");
+    width: 17px;
+    height: 17px;
+}
+.wmsIcon {
+    background: transparent url("../media/wms.png");
+    width: 17px;
+    height: 17px;
+}
