@@ -20,6 +20,9 @@ As mentioned this is what I would consider very stable. This is because in a cha
 1. Rather than indexing feature extents, this indexed the geometry's themselves and used to generate the heatmap
 2. It also uses multiprocessing to speed up the procees and the area is caluclated from the PostGis query interface.
 
+solrgazeteer.py
+======================
+This is what is run after doing a whole run in indexing all features. This is used to update all features that sit in the gazzetter. The only update that is done is to the fild FeatureDate. This is what is used to update this field. This should be run once all features have been indexed.
 
 The solr congfiguration
 ============================
